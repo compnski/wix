@@ -1,0 +1,1 @@
+cjsx -j main -cmw -o . .

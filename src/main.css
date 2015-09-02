@@ -1,0 +1,50 @@
+
+.app-frame {
+  border: darkgrey inset 1px;
+  width: 100%;
+  vertical-align: top;
+}
+
+.status-bar {
+  height: 40px;
+  width: 100%;
+  background-color: lightgrey;
+}
+
+.info-panel {
+  width: 300px;
+  border: 1px darkblue solid;
+  height: 960px;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+.map {
+  position: relative;
+  height: 960px;
+  width: 1280px;
+  display: inline-block;
+}
+
+.cell {
+  position: absolute;
+  height: 64px;
+  width: 64px;
+}
+
+.cell.t_w {
+  background-color: blue;
+}
+.cell.t_s {
+  background-color: yellow;
+}
+.cell.t_d {
+  background-color: tan;
+}
+.cell.t_g {
+  background-color: lightgreen;
+}
+.cell.t_f {
+  background-color: darkgreen;
+}
