@@ -52,8 +52,7 @@ class App.BaseFlow extends App.Events
   complete: (data) ->
     @_active = false
     @trigger('complete', data)
-    @Release()
-
+    @release()
 
   # If this is called, call this function after being restored.
   # Easy way to chain 

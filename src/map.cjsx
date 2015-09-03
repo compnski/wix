@@ -47,12 +47,22 @@ TERRAIN =
     g: 7
     f: 35
 
+TERRAIN_NAMES =
+  w: "Water"
+  s: "Sand"
+  d: "Dirt"
+  g: "Grass"
+  f: "Forest"
+
 class App.Map
   constructor: -> 
-    @mapData = @genMapData(14, 19)
+    @rows = @genMapData(14, 19)
 #    @mapData = @genMapData(16, 20, @mapData) for i in [0..10]
      # blur
      # perlin noise
+
+  terrainAt: (r,c ) ->
+    TERRAIN_NAMES[@rows[r][c]]
 
   pickTile: (mapData, r, c) ->
     weights = {}
@@ -87,11 +97,11 @@ class App.Map
 
 class App.MapComponent extends React.Component
   render: ->
-    <App.GridMap mapData={@props.mapData}/>
+    <App.GridMap viewData={@props.viewData}/>
 
 class App.GridMap extends React.Component
   gridRows: ->
-    for r, row of @props.mapData
+    for r, row of @props.viewData.mapData.rows
       for c, cell of row
         <App.Tile r={r} c={c} data={cell}/>
 
@@ -102,10 +112,12 @@ class App.Tile extends React.Component
 
   handleClick: (e) =>
     E.trigger('tile_clicked', {r:@props.r, c:@props.c})
-    true
+
+  handleMouseOver: (e) =>
+    E.trigger('tile_hovered', {r:@props.r, c:@props.c})
 
   render: ->
     pos =
       left: @props.c * TILE_SIZE
       top: @props.r * TILE_SIZE
-    <div className={"cell t_" + @props.data} style={pos} onClick={@handleClick}></div>
+    <div className={"cell t_" + @props.data} style={pos} onClick={@handleClick} onMouseOver={@handleMouseOver}></div>
